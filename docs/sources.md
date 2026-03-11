@@ -5,7 +5,7 @@
 > Łącznie unikalnych URL: **3185**
 
 
-## 📄 Artykuły naukowe (271)
+## Artykuły naukowe (271)
 
 - <https://dl.acm.org/doi/10.1145/1571941.1572114>  
   _źródło: `Aktualizacja z 18–22 lutego - RRF jako standard w `, `Benchmarki CPU‑first dla SQLite RAG`, `GraphRAG — nowe dema i repo` +5_
@@ -168,7 +168,7 @@
 - <https://arxiv.org/abs/2306.05685>  
   _źródło: `Zestawy benchmarków dla faktualności i pokrycia do`_
 
-## 🐙 Repozytoria GitHub (489)
+## Repozytoria GitHub (489)
 
 - <https://github.com/asg017/sqlite-vec>  
   _źródło: `BM25 i embeddingi — przewodnik strojenia`, `Benchmarki CPU‑first dla SQLite RAG`, `Benchmarki lokalne: FTS5 + wektory` +38_
@@ -331,7 +331,7 @@
 - <https://github.com/ggml-org/llama.cpp/blob/master/tools/server/README.md>  
   _źródło: `Now: CPU‑Only AGI & Agent Research`, `Nowości: RAG i inżynieria wiedzy`_
 
-## 🤖 ML / modele (36)
+## ML / modele (36)
 
 - <https://sbert.net/>  
   _źródło: `Advances in Long‑Lived Agent Architectures`, `Benchmarki lokalne: FTS5 + wektory`, `Fresh RAG & knowledge-engineering hits` +10_
@@ -406,7 +406,7 @@
 - <https://www.sbert.net/examples/cross_encoder/applications/README.html>  
   _źródło: `Hybrydowy stack FTS5 + wektory`_
 
-## 📚 Dokumentacja (459)
+## Dokumentacja (459)
 
 - <https://sqlite.org/fts5.html>  
   _źródło: `20‑minutowy eksperyment dla odzyskania impetu`, `Advances in Long‑Lived Agent Architectures`, `BM25 i embeddingi — przewodnik strojenia` +113_
@@ -569,7 +569,7 @@
 - <https://opentelemetry.io/docs/specs/semconv/gen-ai/gen-ai-metrics/>  
   _źródło: `Blueprinty dla sub‑sekundowego RAG`, `OpenLLMetry i OpenTelemetry GenAI — szybki start`_
 
-## 🔗 Inne zasoby (1930)
+## Inne zasoby (1930)
 
 - <https://www.sqlite.org/fts5.html>  
   _źródło: `Architektura deterministycznych systemów RAG`, `Archiwum Hacker News 22 GB w przeglądarce`, `Benchmarki CPU‑first dla SQLite RAG` +52_
@@ -732,7 +732,7 @@
 - <https://www.sqlite.org/docs.html>  
   _źródło: `CPU‑Only AGI: Key Developments`, `Lokalny wzorzec hybrydowy- FTS5 + BM25 + Embedding`, `Przełomy AI w symulacjach fiz‑chem` +1_
 
-## 📁 Katalogi źródłowe
+## Katalogi źródłowe
 
 Obszar `rag` zawiera **235** katalogów:
 
