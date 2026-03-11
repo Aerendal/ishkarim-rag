@@ -1,103 +1,102 @@
 # ishkarim-rag
 
-> Hybrydowe wyszukiwanie RAG: FTS5 BM25 + embeddingi + RRF fusion. Lokalne, deterministyczne, CPU-first.
+> **Hybrydowe wyszukiwanie RAG — FTS5 + embeddingi + RRF, działa w pełni offline na CPU**
 
-## Instalacja
+[![Tests](https://img.shields.io/badge/tests-passing-brightgreen)]()
+[![Python](https://img.shields.io/badge/python-3.10%2B-blue)]()
+[![License](https://img.shields.io/badge/license-MIT-green)]()
+[![CPU-only](https://img.shields.io/badge/CPU-only-orange)]()
+
+## Problem, który rozwiązujemy
+
+- Wyszukiwanie semantyczne po dużych bazach wiedzy
+- Łączenie wyszukiwania leksykalnego (BM25) z semantycznym (embeddingi) przez RRF fusion
+- Deterministyczne, powtarzalne wyniki — te same wyniki przy tym samym zapytaniu
+
+Pełna lista → [docs/PROBLEMS.md](docs/PROBLEMS.md)
+
+## Szybki start
 
 ```bash
+# Instalacja
 pip install -e projects/ishkarim-rag
+
+# Demo (10 sekund)
+python projects/ishkarim-rag/demo.py
 ```
 
-Lub lokalnie z tego repozytorium:
-
-```bash
-cd projects/ishkarim-rag
-pip install -e ".[dev]"
-```
-
-## Użycie
+## Użycie w kodzie
 
 ```python
 import ishkarim_rag as m
 
-# Lista dostępnych modułów
-print(m.MODULES)
-
-# Wczytaj indeks wiedzy
+# Wszystkie 235 katalogi wiedzy obszaru 'rag'
 docs = m.load_knowledge_index()
+print(f"{len(docs)} katalogów | obszar: {m.__area__}")
+
+# Narzędzia pomocnicze
+from ishkarim_rag.utils import read_work_md, extract_tags, extract_python_blocks
 ```
 
-## Obszar tematyczny
+## Dla kogo
 
-Ten projekt agreguje wiedzę z **235 katalogów** obszaru `rag`:
+- Firmowa baza wiedzy z semantycznym wyszukiwaniem (offline, dane nie opuszczają sieci)
+- System Q&A nad dokumentacją techniczną produktu
+- Narzędzie dla researcherów / analityków do przeszukiwania notatek
 
-- `20‑minutowy eksperyment dla odzyskania impetu`
-- `Adaptacyjna fuzja z wagami zależnymi od zapytania`
-- `Advances in Long‑Lived Agent Architectures`
-- `Agenci narracyjni w pętli RAG`
-- `Agent TODO PoC CPU-only i bezpieczeństwo`
-- `Agent TODO jako kontrolowany automat pracy`
-- `Agent TODO z dokumentów ekstrakcja i audyt`
-- `Agentowe RAG - LangGraph 1.0.6 i nowe dema IBM-Microsoft`
-- … i 227 więcej (pełna lista w [MODULES.md](MODULES.md))
+## Dokumentacja
 
-## Przykładowe źródła
+| Plik | Zawartość |
+|------|-----------|
+| [docs/PROBLEMS.md](docs/PROBLEMS.md) | Co rozwiązuje / czego nie / znane problemy |
+| [docs/api.md](docs/api.md) | Dokumentacja API |
+| [docs/overview.md](docs/overview.md) | Przegląd obszaru |
+| [docs/sources.md](docs/sources.md) | Źródłowe katalogi wiedzy |
+| [MODULES.md](MODULES.md) | Pełny indeks 235 katalogów |
 
-### 20‑minutowy eksperyment dla odzyskania impetu
+## Testy i benchmarki
 
-# WORK: 20‑minutowy eksperyment dla odzyskania impetu
-## 0-Metadane
-- Katalog: 20‑minutowy eksperyment dla odzyskania impetu
-- Pliki: 14 (bez placeholderów; pliki 1–14 zawierają treść, 15–60 są puste)
-- Tagi: sprint, 3-warianty, FTS5, benchmark, SQLite, DoD-lite, decyzje, produktywność
+```bash
+# Testy jednostkowe
+pytest tests/test_rag.py -v
 
-### Adaptacyjna fuzja z wagami zależnymi od zapytania
+# Testy domenowe (z prawdziwymi danymi)
+pytest tests/test_rag_domain.py -v
 
-# WORK: Adaptacyjna fuzja z wagami zależnymi od zapytania
-## 0-Metadane
-- Katalog: Adaptacyjna fuzja z wagami zależnymi od zapytania
-- Pliki: 18 (bez placeholderów)
-- Tagi: RAG, fuzja-rankingów, wagi-adaptacyjne, RRF, QPP, bandit, supervised, kalibracja, offline-pipeline, harness, NDCG, TREC
-
-### Advances in Long‑Lived Agent Architectures
-
-# WORK: Advances in Long‑Lived Agent Architectures
-## 0-Metadane
-- Katalog: Advances in Long‑Lived Agent Architectures
-- Pliki: 20 (bez placeholderów; pliki 21–60 puste)
-- Tagi: long-lived-agents, persistent-memory, lifecycle, SQLite, FTS5, offline, checkpointing, replay, self-maintenance, retrieval, hash-chain
-
+# Benchmarki wydajnościowe
+python benchmarks/bench_rag.py --quick
+```
 
 ## Struktura projektu
 
 ```
 ishkarim-rag/
-├── pyproject.toml        # installable package
+├── demo.py                    ← uruchom mnie
+├── pyproject.toml
 ├── README.md
-├── MODULES.md            # pełny indeks 235 katalogów-źródeł
-├── src/
-│   └── ishkarim_rag/
-│       ├── __init__.py   # publiczne API
-│       ├── utils.py      # wspólne narzędzia
-│       └── *.py          # kod wyekstrahowany z WORK.md
+├── MODULES.md                 ← 235 katalogów-źródeł
+├── docs/
+│   ├── PROBLEMS.md            ← co rozwiązuje / czego nie
+│   ├── api.md                 ← dokumentacja API
+│   ├── overview.md
+│   └── sources.md
+├── src/ishkarim_rag/
+│   ├── __init__.py            ← MODULES list + load_knowledge_index()
+│   ├── utils.py               ← read_work_md, extract_tags, extract_python_blocks
+│   └── snippets/              ← kod z WORK.md (referencyjny)
 ├── tests/
-│   ├── __init__.py
-│   └── test_rag.py
-└── docs/
-    ├── overview.md
-    └── sources.md
+│   ├── test_rag.py         ← testy jednostkowe
+│   └── test_rag_domain.py  ← testy domenowe
+└── benchmarks/
+    └── bench_rag.py        ← benchmarki wydajnościowe
 ```
 
-## Testy
+## Ograniczenia
 
-```bash
-pytest projects/ishkarim-rag/tests/ -v
-```
-
-## Źródło danych
-
-Katalogi źródłowe znajdują się w katalogu głównym repozytorium Ishkarim.
-Każdy katalog zawiera `WORK.md` (notatki badawcze) i `TAGS.md` (metadane).
+> ⚠️ To projekt **referencyjny** — wzorce i wiedza, nie gotowa biblioteka produkcyjna.
+> Przed wdrożeniem produkcyjnym przeczytaj [docs/PROBLEMS.md](docs/PROBLEMS.md).
 
 ---
-*Wygenerowano automatycznie przez `scripts/build_projects.py`*
+
+*Część ekosystemu [Ishkarim](../../README.md) — 235 katalogów wiedzy obszaru `rag`*
+*Wygenerowano: 2026-03-11 | `scripts/build_projects.py` + `scripts/enrich_projects.py`*
